@@ -43665,6 +43665,7 @@
  "hackerone|paypal|*.venmo.com",
  "hackerone|paypal|*.xoom.com",
  "hackerone|paypal|351727428",
+ "hackerone|paypal|account restrictions and control bypasses - campaign",
  "hackerone|paypal|api.loanbuilder.com",
  "hackerone|paypal|api.swiftfinancial.com",
  "hackerone|paypal|braintree sdk",
