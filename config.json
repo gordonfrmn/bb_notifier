@@ -1,0 +1,9 @@
+{
+  "platforms": ["hackerone", "bugcrowd", "intigriti", "yeswehack"],
+  "bounty_only": false,
+  "exclude_asset_types": [],
+  "stale_hours": 6,
+  "min_ratio": 0.5,
+  "flood_threshold": 200,
+  "max_assets_per_program": 15
+}
