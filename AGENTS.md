@@ -3,7 +3,7 @@
 Discord notifier for new bug bounty programs / in-scope assets (H1, Bugcrowd, Intigriti, YesWeHack).
 
 - `notifier.py`: stdlib-only. Diffs arkadiyt/bounty-targets-data against `state/seen.json` (a cumulative seen set) and posts to `DISCORD_WEBHOOK`.
-- `config.json`: settings, including `notify_categories` (the mute allowlist; `[]` = everything).
+- `config.json`: settings, including `mute_categories` (categories to skip; `[]` = notify everything).
 - `.github/workflows/check.yml`: runs every 30 min on GitHub Actions and commits `state/` as github-actions[bot]. Never hand-edit `state/` unless you're testing.
 - Local test: `DRY_RUN=1 python3 notifier.py`. `secrets.env` holds the webhook locally.
 - `secrets.env` and `deploy_keys/` are gitignored. Never commit them.

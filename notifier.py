@@ -214,7 +214,8 @@ def build_embed(platform, prog, assets, is_new, max_assets):
         lines.append("Types: " + " · ".join(f"{n} {c}" for c, n in cats.most_common()))
         lines.append("")
         for asset, typ, _ in assets[:max_assets]:
-            a = asset if len(asset) <= 150 else asset[:147] + "..."
+            a = " ".join(asset.split())
+            a = a if len(a) <= 150 else a[:147] + "..."
             lines.append(f"`{asset_category(typ)}` {a}")
         if len(assets) > max_assets:
             lines.append(f"…and {len(assets) - max_assets} more")
@@ -271,12 +272,12 @@ def run():
     cfg = load_json(CONFIG_FILE, {})
     cfg.setdefault("platforms", list(PLATFORM_LABEL))
     cfg.setdefault("bounty_only", False)
-    cfg.setdefault("notify_categories", [])
+    cfg.setdefault("mute_categories", [])
     cfg.setdefault("stale_hours", 6)
     cfg.setdefault("min_ratio", 0.5)
     cfg.setdefault("flood_threshold", 200)
     cfg.setdefault("max_assets_per_program", 15)
-    allowed_cats = {c.lower() for c in cfg["notify_categories"]}  # empty = all
+    muted_cats = {c.lower() for c in cfg["mute_categories"]}
 
     seen_list = load_json(SEEN_FILE, [])
     seen = set(seen_list)
@@ -312,7 +313,7 @@ def run():
                 if akey in seen or akey in new_keys:
                     continue
                 new_keys.add(akey)
-                if allowed_cats and asset_category(typ) not in allowed_cats:
+                if asset_category(typ) in muted_cats:
                     continue
                 if cfg["bounty_only"] and not eligible:
                     continue
@@ -323,8 +324,8 @@ def run():
                 continue
             if cfg["bounty_only"] and not prog["bounty"]:
                 continue
-            if allowed_cats and not fresh:
-                continue  # nothing in a category we care about
+            if muted_cats and prog["assets"] and not fresh:
+                continue  # only muted assets
             if is_new or fresh:
                 total_new += 1 + len(fresh) if is_new else len(fresh)
                 embeds.append(build_embed(platform, prog, fresh, is_new,
