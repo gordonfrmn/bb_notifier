@@ -18,6 +18,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -44,6 +45,31 @@ PLATFORM_COLOR = {
     "intigriti": 0x161A36,
     "yeswehack": 0x2ECC71,
 }
+
+# Platform-specific asset types -> common category shown in Discord.
+# Unmapped types are shown as-is (lowercased).
+ASSET_CATEGORY = {
+    "url": "web", "website": "web", "web-application": "web",
+    "wildcard": "wildcard",
+    "api": "api",
+    "google_play_app_id": "android", "other_apk": "android", "android": "android",
+    "mobile-application-android": "android",
+    "apple_store_app_id": "ios", "testflight": "ios", "other_ipa": "ios", "ios": "ios",
+    "mobile-application-ios": "ios",
+    "mobile-application": "mobile", "application": "application",
+    "downloadable_executables": "executable", "windows_app_store_app_id": "windows app",
+    "source_code": "source code",
+    "hardware": "hardware", "iot": "hardware", "device": "hardware",
+    "cidr": "network", "ip_address": "network", "iprange": "network", "network": "network",
+    "smart_contract": "smart contract",
+    "ai_model": "ai model", "ai-model": "ai model",
+    "other": "other", "challenge": "other",
+}
+
+
+def asset_category(typ):
+    t = (typ or "").strip().lower()
+    return ASSET_CATEGORY.get(t, t or "unknown")
 
 if SECRETS_FILE.exists():
     for line in SECRETS_FILE.read_text(encoding="utf-8").splitlines():
@@ -184,10 +210,12 @@ def build_embed(platform, prog, assets, is_new, max_assets):
         title = f"➕ {len(assets)} new asset{'s' if len(assets) != 1 else ''}: {prog['name']}"
     lines = [f"**{label}** · {prog['bounty_str']}"]
     if assets:
+        cats = Counter(asset_category(t) for _, t, _ in assets)
+        lines.append("Types: " + " · ".join(f"{n} {c}" for c, n in cats.most_common()))
         lines.append("")
         for asset, typ, _ in assets[:max_assets]:
             a = asset if len(asset) <= 150 else asset[:147] + "..."
-            lines.append(f"`{(typ or '?').lower()}` {a}")
+            lines.append(f"`{asset_category(typ)}` {a}")
         if len(assets) > max_assets:
             lines.append(f"…and {len(assets) - max_assets} more")
     embed = {
