@@ -1,4 +1,5 @@
 {
+ "platform_issues": {},
  "program_counts": {
   "bugcrowd": 298,
   "hackerone": 450,
