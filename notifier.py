@@ -287,21 +287,39 @@ def run():
     first_run = not seen
 
     if not DATA_DIR:
-        check_freshness(cfg, meta)
+        try:
+            check_freshness(cfg, meta)
+        except Exception as e:  # noqa: BLE001 - transient GitHub API errors shouldn't fail the run
+            print(f"freshness check failed: {e}", file=sys.stderr)
 
+    # platform -> consecutive bad runs; warn on the first, note recovery after
+    issues = meta.setdefault("platform_issues", {})
     embeds, warnings, total_new = [], [], 0
     new_keys = set()
+
+    def bad_run(platform, msg):
+        issues[platform] = issues.get(platform, 0) + 1
+        if issues[platform] == 1:
+            warnings.append(f"{PLATFORM_LABEL[platform]}: {msg}. Skipping it until it looks normal.")
+
     for platform in cfg["platforms"]:
+        label = PLATFORM_LABEL[platform]
         try:
             programs = load_platform(platform)
         except Exception as e:  # noqa: BLE001 - one bad platform shouldn't kill the run
-            warnings.append(f"{PLATFORM_LABEL[platform]}: failed to load ({e})")
+            bad_run(platform, f"failed to load ({e})")
             continue
         prev = counts.get(platform, 0)
         if prev and len(programs) < prev * cfg["min_ratio"]:
-            warnings.append(f"{PLATFORM_LABEL[platform]}: only {len(programs)} programs "
-                            f"(was {prev}), skipping this run")
-            continue
+            # A drop that persists ~6 h is probably real; accept the new baseline.
+            if issues.get(platform, 0) < 12:
+                bad_run(platform, f"only {len(programs)} programs (was {prev})")
+                continue
+            warnings.append(f"{label}: program count has stayed at {len(programs)} "
+                            f"(was {prev}), so accepting it as the new normal.")
+            issues.pop(platform)
+        if issues.pop(platform, 0):
+            warnings.append(f"✅ {label}: data looks normal again.")
         counts[platform] = len(programs)
 
         for prog in programs:
@@ -333,7 +351,7 @@ def run():
 
     # Notify before saving state: if Discord fails, the run fails and retries next time.
     if warnings:
-        send_text("⚠️ " + "\n⚠️ ".join(warnings))
+        send_text("\n".join(w if w.startswith("✅") else "⚠️ " + w for w in warnings))
     if first_run:
         print(f"First run: seeded {len(new_keys)} keys without notifying.")
     elif total_new > cfg["flood_threshold"]:
