@@ -17,7 +17,7 @@ using data from [arkadiyt/bounty-targets-data](https://github.com/arkadiyt/bount
 |---|---|
 | `platforms` | which platforms to watch |
 | `bounty_only` | skip VDPs / non-bounty-eligible assets |
-| `exclude_asset_types` | e.g. `["other", "hardware"]` (case-insensitive) |
+| `notify_categories` | only notify for assets in these categories (`[]` = all). Categories: web, wildcard, api, android, ios, mobile, application, executable, windows app, source code, hardware, network, smart contract, ai model, other, unknown. New programs with no matching assets are muted too. |
 | `stale_hours` | alert if upstream hasn't updated in this long |
 | `min_ratio` | skip a platform if its program count drops below this fraction (scraper glitch) |
 | `flood_threshold` | above this many new items, send one summary instead of individual alerts |

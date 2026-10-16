@@ -271,12 +271,12 @@ def run():
     cfg = load_json(CONFIG_FILE, {})
     cfg.setdefault("platforms", list(PLATFORM_LABEL))
     cfg.setdefault("bounty_only", False)
-    cfg.setdefault("exclude_asset_types", [])
+    cfg.setdefault("notify_categories", [])
     cfg.setdefault("stale_hours", 6)
     cfg.setdefault("min_ratio", 0.5)
     cfg.setdefault("flood_threshold", 200)
     cfg.setdefault("max_assets_per_program", 15)
-    excluded_types = {t.lower() for t in cfg["exclude_asset_types"]}
+    allowed_cats = {c.lower() for c in cfg["notify_categories"]}  # empty = all
 
     seen_list = load_json(SEEN_FILE, [])
     seen = set(seen_list)
@@ -312,7 +312,7 @@ def run():
                 if akey in seen or akey in new_keys:
                     continue
                 new_keys.add(akey)
-                if (typ or "").lower() in excluded_types:
+                if allowed_cats and asset_category(typ) not in allowed_cats:
                     continue
                 if cfg["bounty_only"] and not eligible:
                     continue
@@ -323,6 +323,8 @@ def run():
                 continue
             if cfg["bounty_only"] and not prog["bounty"]:
                 continue
+            if allowed_cats and not fresh:
+                continue  # nothing in a category we care about
             if is_new or fresh:
                 total_new += 1 + len(fresh) if is_new else len(fresh)
                 embeds.append(build_embed(platform, prog, fresh, is_new,

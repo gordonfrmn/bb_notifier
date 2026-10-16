@@ -1,7 +1,7 @@
 {
   "platforms": ["hackerone", "bugcrowd", "intigriti", "yeswehack"],
   "bounty_only": false,
-  "exclude_asset_types": [],
+  "notify_categories": ["android", "ios", "source code", "hardware", "ai model", "other"],
   "stale_hours": 6,
   "min_ratio": 0.5,
   "flood_threshold": 200,
