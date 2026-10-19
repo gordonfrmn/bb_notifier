@@ -2738,6 +2738,7 @@
  "bugcrowd|https://bugcrowd.com/engagements/sykora-it-market|https://marketplace.atlassian.com/apps/1234296/azure-sync-for-jira-assets?hosting=cloud",
  "bugcrowd|https://bugcrowd.com/engagements/t-mobile",
  "bugcrowd|https://bugcrowd.com/engagements/t-mobile|cellular network auth bypass via web app/t-life (404-200-7239)",
+ "bugcrowd|https://bugcrowd.com/engagements/t-mobile|http://10.72.218.66/flag.txt",
  "bugcrowd|https://bugcrowd.com/engagements/t-mobile|https://*.assurancewireless.com",
  "bugcrowd|https://bugcrowd.com/engagements/t-mobile|https://*.uscc.com",
  "bugcrowd|https://bugcrowd.com/engagements/t-mobile|https://*.uscc.net",
