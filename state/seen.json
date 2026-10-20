@@ -46015,6 +46015,7 @@
  "hackerone|vercel|*.vercel.live",
  "hackerone|vercel|https://github.com/nitrojs/nitro",
  "hackerone|vercel|https://github.com/nuxt/nuxt",
+ "hackerone|vercel|https://github.com/sveltejs/kit",
  "hackerone|vercel|https://github.com/sveltejs/svelte",
  "hackerone|vercel|https://github.com/vercel",
  "hackerone|vercel|https://github.com/vercel-labs/agent-skills",
