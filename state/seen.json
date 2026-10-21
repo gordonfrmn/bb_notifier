@@ -42183,6 +42183,7 @@
  "hackerone|mongodb|voyageai.com",
  "hackerone|mongodb|vs code plugin",
  "hackerone|moonpay",
+ "hackerone|moonpay|*.dflow.net",
  "hackerone|moonpay|*.hypermint.com",
  "hackerone|moonpay|*.iron.xyz",
  "hackerone|moonpay|*.moonpay.com",
