@@ -22495,6 +22495,7 @@
  "hackerone|early_warning|*.zellepay.com",
  "hackerone|early_warning|developer*.earlywarning.com",
  "hackerone|early_warning|ews-fusion.my.site.com",
+ "hackerone|early_warning|https://accountinfo.earlywarning.com",
  "hackerone|early_warning|support*.earlywarning.com",
  "hackerone|early_warning|www.certos.com",
  "hackerone|early_warning|zelleservice.my.salesforce.com",
