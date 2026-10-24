@@ -24060,6 +24060,7 @@
  "hackerone|exodus|*.a.exodus.io",
  "hackerone|exodus|*.exodus.com",
  "hackerone|exodus|*.exodus.io",
+ "hackerone|exodus|agents.exodus.com",
  "hackerone|exodus|ctr.a.exodus.io",
  "hackerone|exodus|exodus desktop wallet",
  "hackerone|exodus|exodus-movement.exodus",
