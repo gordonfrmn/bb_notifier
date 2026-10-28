@@ -21210,6 +21210,7 @@
  "hackerone|databricks|databricks free edition",
  "hackerone|databricks|databricks.com",
  "hackerone|databricks|https://dbc-9a3f8ed1-7608.cloud.databricks.com",
+ "hackerone|databricks|https://github.com/databricks/*",
  "hackerone|databricks|lakebase-supported extensions",
  "hackerone|databricks|login.databricks.com",
  "hackerone|databricks|open scope",
