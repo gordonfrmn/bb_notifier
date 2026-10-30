@@ -46165,6 +46165,7 @@
  "hackerone|vercel",
  "hackerone|vercel|*.vercel.com",
  "hackerone|vercel|*.vercel.live",
+ "hackerone|vercel|https://github.com/better-auth/better-auth",
  "hackerone|vercel|https://github.com/nitrojs/nitro",
  "hackerone|vercel|https://github.com/nuxt/nuxt",
  "hackerone|vercel|https://github.com/sveltejs/kit",
