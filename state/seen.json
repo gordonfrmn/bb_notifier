@@ -6648,6 +6648,7 @@
  "hackerone|braze_inc",
  "hackerone|braze_inc|https://bug-bounty-api.k8s.tools-001.d-use-1.braze-dev.com",
  "hackerone|braze_inc|https://bug-bounty-dashboard.k8s.tools-001.d-use-1.braze-dev.com",
+ "hackerone|braze_inc|https://bug-bounty-mcp.k8s.tools-001.d-use-1.braze-dev.com/mcp",
  "hackerone|braze_inc|https://bug-bounty-rest.k8s.tools-001.d-use-1.braze-dev.com",
  "hackerone|brightspeed",
  "hackerone|brightspeed|*.brightspeed.com",
