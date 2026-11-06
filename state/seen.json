@@ -6431,6 +6431,7 @@
  "hackerone|aws_vdp|https://github.com/aws/aws-cdk",
  "hackerone|aws_vdp|https://github.com/aws/aws-cli",
  "hackerone|aws_vdp|https://github.com/aws/aws-sdk",
+ "hackerone|aws_vdp|https://github.com/aws/s2n-quic",
  "hackerone|aws_vdp|https://github.com/aws/s2n-tls",
  "hackerone|aws_vdp|https://github.com/awslabs/*",
  "hackerone|aws_vdp|https://github.com/deepjavalibrary/*",
