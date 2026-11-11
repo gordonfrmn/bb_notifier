@@ -36621,6 +36621,7 @@
  "hackerone|hex|https://hex.tech",
  "hackerone|hilton",
  "hackerone|hilton|*.hilton.com",
+ "hackerone|hilton|*.hilton.com.cn",
  "hackerone|hilton|*.hilton.io",
  "hackerone|hilton|*.hiltonbusinessonline.com",
  "hackerone|hilton|*.hiltonlocalbiz.com",
