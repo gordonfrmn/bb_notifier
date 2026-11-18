@@ -1,9 +1,9 @@
 {
  "platform_issues": {},
  "program_counts": {
-  "bugcrowd": 296,
+  "bugcrowd": 297,
   "hackerone": 449,
-  "intigriti": 148,
+  "intigriti": 147,
   "yeswehack": 52
  }
 }
